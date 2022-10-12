@@ -47,14 +47,16 @@
             el: '#app',
             data: () => {
                 return {
+                    chart:{},
+                    table:{},
                     data: '111',
-                    value1:'1'
+                    value1: '1'
                 }
             },
             created() {
                 console.log(111);
             },
-            mounted(){
+            mounted() {
                 this.initAnchor()
             },
             methods: {
@@ -62,66 +64,159 @@
                     var anchor = document.getElementById('Anchor');
                     var myChart = echarts.init(anchor);
                     console.log(myChart);
-                    option = {
-                        title: {
-                            text: 'Stacked Line'
-                        },
+                    const option = {
                         tooltip: {
-                            trigger: 'axis'
+                            trigger: "axis"
+                        },
+                        color: [
+                            "rgba(91, 143, 249, 1)",
+                            "rgba(90, 216, 166, 1)",
+                            "rgba(246, 189, 22, 1)",
+                        ],
+                        xAxis: {
+                            type: "category",
+                            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                            lineStyle: {
+                                type: "dotted"
+                            },
+                            boundaryGap: [10, 10],
+                            axisTick: {
+                                show: false,
+                                alignWithLabel: true
+                            },
+                            axisLine: { lineStyle: { color: "#666666" } },
+                            axisLabel: {
+                                margin: 16
+                            }
                         },
                         legend: {
-                            data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+                            // 图例
+                           
+                            // icon: "circle",
+                            bottom: 0,
+                            itemWidth: 12,
+                            itemHeight: 12,
+                            textStyle: { padding: [1, 0, 0, 0] }
                         },
                         grid: {
-                            left: '3%',
-                            right: '4%',
-                            bottom: '3%',
-                            containLabel: true
+                            left: 60,
+                            right: 60,
+                            top: 70,
+                            bottom: 50
                         },
-                        toolbox: {
-                            feature: {
-                                saveAsImage: {}
-                            }
-                        },
-                        xAxis: {
-                            type: 'category',
-                            boundaryGap: false,
-                            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-                        },
-                        yAxis: {
-                            type: 'value'
-                        },
+                        yAxis: [
+                            {
+                                type: "value",
+                                splitNumber: 5,
+                                axisLine: {
+                                    show: false,
+                                    // minInterval: 1,
+                                    lineStyle: {
+                                        type: "solid",
+                                        color: "#000", //左边线的颜色
+                                        width: "1" //坐标线的宽度
+                                    }
+                                },
+                                axisLabel: {
+                                    textStyle: {
+                                        color: "#5A5A5A" //坐标值得具体的颜色
+                                    }
+                                },
+                                axisTick: false,
+                                min: 0, //取0为最小刻度
+                                max: this.leftmax + 10,
+                                interval: Math.ceil((this.leftmax + 10) / 4),
+                                splitLine: {
+                                    lineStyle: {
+                                        type: "dashed", //虚线,
+                                        width: 1
+                                    },
+                                    show: true //隐藏
+                                }
+                            },
+                        ],
                         series: [
                             {
-                                name: 'Email',
-                                type: 'line',
-                                stack: 'Total',
-                                data: [120, 132, 101, 134, 90, 230, 210]
+                                name: "注册",
+                                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                                type: "line", // 类型设置为折线图
+                                itemStyle: {
+                                    normal: {
+                                        lineStyle: {
+                                            width: 1
+                                        }
+                                    }
+                                },
+                                label: {
+                                    show: true,
+                                    position: "top",
+                                    textStyle: {
+                                        fontSize: 16
+                                    },
+                                    formatter: params => {
+                                        if (params.value == 0) {
+                                            return "";
+                                        } else {
+                                            return params.value;
+                                        }
+                                    }
+                                },
+                                smooth: true
                             },
                             {
-                                name: 'Union Ads',
-                                type: 'line',
-                                stack: 'Total',
-                                data: [220, 182, 191, 234, 290, 330, 310]
+                                name: "授权",
+                                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                                type: "line", // 类型设置为折线图
+                                itemStyle: {
+                                    normal: {
+                                        lineStyle: {
+                                            width: 1
+                                        }
+                                    }
+                                },
+                                label: {
+                                    show: true,
+                                    position: "top",
+                                    textStyle: {
+                                        fontSize: 16
+                                    },
+                                    formatter: params => {
+                                        if (params.value == 0) {
+                                            return "";
+                                        } else {
+                                            return params.value;
+                                        }
+                                    }
+                                },
+                                smooth: true
                             },
                             {
-                                name: 'Video Ads',
-                                type: 'line',
-                                stack: 'Total',
-                                data: [150, 232, 201, 154, 190, 330, 410]
+                                name: "日活",
+                                data: [820, 932, 901, 934, 1290, 1330, 1320],
+                                type: "line", // 类型设置为折线图
+                                itemStyle: {
+                                    normal: {
+                                        lineStyle: {
+                                            width: 1
+                                        }
+                                    }
+                                },
+                                label: {
+                                    show: true,
+                                    position: "top",
+                                    textStyle: {
+                                        fontSize: 16
+                                    },
+                                    formatter: params => {
+                                        if (params.value == 0) {
+                                            return "";
+                                        } else {
+                                            return params.value;
+                                        }
+                                    }
+                                },
+                                smooth: true
                             },
-                            {
-                                name: 'Direct',
-                                type: 'line',
-                                stack: 'Total',
-                                data: [320, 332, 301, 334, 390, 330, 320]
-                            },
-                            {
-                                name: 'Search Engine',
-                                type: 'line',
-                                stack: 'Total',
-                                data: [820, 932, 901, 934, 1290, 1330, 1320]
-                            }
                         ]
                     };
 
