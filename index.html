@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script>Vue.config.productionTip = false </script>
+
+
+
+    <title>后台管理系统看板</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <div class="Anchor_charts">
+            <header>
+                <span class="topic">注册/授权/日活主播</span>
+                <div class="Data_picker">
+                    <span class="time">统计时间</span>
+                    <el-date-picker v-model="value1" type="daterange" range-separator="至" start-placeholder="开始日期"
+                        style="margin: 0 10px;" end-placeholder="结束日期">
+                    </el-date-picker>
+                    <el-button type="primary">确定</el-button>
+                </div>
+            </header>
+            <div id="Anchor"></div>
+        </div>
+        <div class="Samples"></div>
+    </div>
+
+
+
+    <script type="text/javascript">
+        Vue.component('Child', {
+            template: '<span>1111</span>'
+        })
+        new Vue({
+            el: '#app',
+            data: () => {
+                return {
+                    data: '111',
+                    value1:'1'
+                }
+            },
+            created() {
+                console.log(111);
+            },
+            mounted(){
+                this.initAnchor()
+            },
+            methods: {
+                initAnchor() {
+                    var anchor = document.getElementById('Anchor');
+                    var myChart = echarts.init(anchor);
+                    console.log(myChart);
+                    option = {
+                        title: {
+                            text: 'Stacked Line'
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        toolbox: {
+                            feature: {
+                                saveAsImage: {}
+                            }
+                        },
+                        xAxis: {
+                            type: 'category',
+                            boundaryGap: false,
+                            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [
+                            {
+                                name: 'Email',
+                                type: 'line',
+                                stack: 'Total',
+                                data: [120, 132, 101, 134, 90, 230, 210]
+                            },
+                            {
+                                name: 'Union Ads',
+                                type: 'line',
+                                stack: 'Total',
+                                data: [220, 182, 191, 234, 290, 330, 310]
+                            },
+                            {
+                                name: 'Video Ads',
+                                type: 'line',
+                                stack: 'Total',
+                                data: [150, 232, 201, 154, 190, 330, 410]
+                            },
+                            {
+                                name: 'Direct',
+                                type: 'line',
+                                stack: 'Total',
+                                data: [320, 332, 301, 334, 390, 330, 320]
+                            },
+                            {
+                                name: 'Search Engine',
+                                type: 'line',
+                                stack: 'Total',
+                                data: [820, 932, 901, 934, 1290, 1330, 1320]
+                            }
+                        ]
+                    };
+
+                    option && myChart.setOption(option);
+
+                },
+
+                getdata() {
+                    // console.log(this);
+                    alert(this.data)
+                }
+            },
+
+        })
+    </script>
+</body>
+
+</html>
